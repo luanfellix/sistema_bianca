@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Paciente</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Cor de fundo cinza claro */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff; /* Cor de fundo branca */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #6f42c1; /* Cor roxa clara */
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="date"], input[type="tel"], textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #dcdcdc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            background-color: #6f42c1; /* Cor roxa clara */
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #5a2d9b; /* Cor roxa mais escura */
+        }
+
+        .options-group {
+            margin-top: 10px;
+        }
+
+        .options-group label {
+            margin-top: 0;
+            font-weight: normal;
+        }
+
+        .options-group input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .options-group input[type="text"] {
+            margin-top: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro de Paciente</h1>
+        <form action="/cadastrar" method="post">
+            <!-- Campos básicos -->
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="dob">Data de Nascimento:</label>
+            <input type="date" id="dob" name="dob" required>
+
+            <label for="gender">Gênero:</label> 
+            <select id="gender" name="gender" required>
+                <option value="" disabled selected>Selecione</option>
+                <option value="male">Masculino</option>
+                <option value="female">Feminino</option>
+                <option value="other">Outro</option>
+            </select>
+
+            <label for="contact">Contato:</label>
+            <input type="tel" id="contact" name="contact" required>
+
+            <label for="address">Endereço:</label>
+            <textarea id="address" name="address" rows="2" required></textarea>
+
+            <!-- Novos campos -->
+            <label for="chief-complaint">Queixa Principal:</label>
+            <textarea id="chief-complaint" name="chief-complaint" rows="2" required></textarea>
+
+            <label for="disease-history">Histórico da Doença:</label>
+            <textarea id="disease-history" name="disease-history" rows="3" required></textarea>
+
+            <fieldset class="options-group">
+                <legend>História Pessoal:</legend>
+                <label>
+                    <input type="checkbox" id="ethanol" name="personal-history" value="etilista">
+                    Etilista
+                </label>
+                <label>
+                    <input type="checkbox" id="smoker" name="personal-history" value="tabagista">
+                    Tabagista
+                </label>
+                <label>
+                    <input type="checkbox" id="other" name="personal-history" value="outro">
+                    Outro:
+                    <input type="text" id="other-history" name="other-history">
+                </label>
+            </fieldset>
+
+            <label for="medications">Medicações em Uso:</label>
+            <textarea id="medications" name="medications" rows="2"></textarea>
+
+            <label for="physical-activity">Atividade Física:</label>
+            <input type="text" id="physical-activity" name="physical-activity">
+
+            <label for="surgical-history">Antecedentes Cirúrgicos:</label>
+            <textarea id="surgical-history" name="surgical-history" rows="3"></textarea>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+</body>
+</html>

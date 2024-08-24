@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e9e9e9; /* Cor de fundo cinza claro */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .option {
+            background-color: #ffffff; /* Cor de fundo branca */
+            border: 1px solid #dcdcdc; /* Cor da borda cinza claro */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            text-decoration: none; /* Remove o sublinhado dos links */
+            color: inherit; /* Herda a cor do texto do pai */
+        }
+
+        .option:hover {
+            background-color: #f4f4f4; /* Cor de fundo ao passar o mouse */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .option h2 {
+            margin: 0;
+            color: #6f42c1; /* Cor roxa clara */
+            font-size: 22px;
+        }
+
+        .option p {
+            margin: 10px 0 0;
+            color: #666; /* Cor do texto cinza escuro */
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/cadastrar" class="option">
+            <h2>Cadastrar Paciente</h2>
+            <p>Adicionar um novo paciente ao sistema.</p>
+        </a>
+        <a href="/listar" class="option">
+            <h2>Listar Pacientes</h2>
+            <p>Visualizar todos os pacientes cadastrados.</p>
+        </a>
+        <a href="/visualizar" class="option">
+            <h2>Visualizar Pagamentos</h2>
+            <p>Consultar detalhes dos pagamentos realizados.</p>
+        </a>
+        <a href="/agendar" class="option">
+            <h2>Agendamento</h2>
+            <p>Realizar e visualizar agendamentos.</p>
+        </a>
+    </div>
+</body>
+</html>

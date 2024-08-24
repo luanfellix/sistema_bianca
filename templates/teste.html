@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Cadastros</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .delete-btn {
+            background-color: #f44336; /* Red */
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .delete-btn:hover {
+            background-color: #d32f2f; /* Darker red */
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Cadastros</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Endereço</th>
+                <th>Ações</th> <!-- Coluna para ações -->
+            </tr>
+        </thead>
+        <tbody>
+            {% if listagem %}
+                {% for lista in listagem %}
+                    <tr>
+                        <td>{{ lista.id }}</td>
+                        <td>{{ lista.nome }}</td>
+                        <td>{{ lista.endereco }}</td>
+                        <td>
+                            <!-- Botão de exclusão -->
+                            <form action="{{ url_for('delete', id=lista.id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir?');">
+                                <button type="submit" class="delete-btn">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">Nenhum cadastro encontrado</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</body>
+</html>
