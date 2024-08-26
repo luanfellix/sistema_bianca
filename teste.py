@@ -16,16 +16,6 @@ cursor.execute("INSERT INTO pessoa(nome, idade) values ('joao', '15')")
 conexao.commit()'''
 
 
-cursor = conexao.cursor()
-cursor.execute("USE teste")
-
-name = input("qual seu nome?")
-
-age = input("qual sua idade?")
-
-cursor.execute("INSERT INTO pessoa(nome, idade) VALUES (%s, %s)",(name, age))
-
-conexao.commit()
 
 
 

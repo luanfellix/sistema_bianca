@@ -67,7 +67,7 @@
                                 <button type="submit" class="delete-btn">Excluir</button>
                             </form>
                             <!-- Botão de visualização -->
-                            <form action="" method="GET" style="display:inline;">
+                            <form action="{{ url_for('visualizar', id=lista.id) }}" method="POST" style="display:inline;">
                                 <button type="submit" class="view-btn">Visualizar Cadastro</button>
                             </form>
                         </td>

@@ -20,6 +20,7 @@ conexao_dict = pymysql.connect(
 
 # criando uma instancia do Flask e secretkey do session
 app = Flask(__name__)
+cursor_dict = conexao_dict.cursor()
 
 # criando a rota pra tela de login + validação de login com informações do banco de dados pra prosseguir nas prox paginas
 
@@ -79,7 +80,7 @@ def tela_cadastro():
     else:
         # codigo mysql pra realizar o armazenamento dos dados de cadastro no bf
         cursor = conexao.cursor()
-        #lembrar de deixar essa linha mas dinamica dps
+        # lembrar de deixar essa linha mas dinamica dps
         cursor.execute("INSERT INTO cadastro_pacientes (nome, data_nasc, genero, contato, endereco, queixa_principal,historico_doenca, medicacao_em_uso, atv_fisica, antec_cirurgico) VALUES(%s, %s,%s, %s,%s, %s,%s, %s,%s,%s)",
                        (nome, data_nasc, genero, contato, endereco, queixa_principal, historico_doenca, medicacao_em_uso, atv_fisica, antec_cirurgico))
         conexao.commit()
@@ -105,6 +106,25 @@ def delete(id):
     cursor.execute("DELETE FROM cadastro_pacientes WHERE id = %s", (id))
     conexao_dict.commit()
     return redirect(url_for('pagina_inicial'))
+
+
+# rota para pagina de visualização dos cadastros especificos
+@app.route("/visualizar_cadastro/<int:id>", methods=['POST', 'GET'])
+def visualizar(id):
+    cursor = conexao_dict.cursor()
+    cursor.execute('SELECT * FROM cadastro_pacientes WHERE id = %s', (id,))
+    paciente = cursor.fetchone()
+    conexao_dict.commit()
+
+    return render_template("visualizar_cadastro.html", paciente=paciente)
+
+
+# rota pra visualizar pagamentos dos dados cadastrados
+@app.route("/pagamentos")
+def pagamentos():
+    query = 'SELECT '
+
+    return render_template("tela_de_pagamentos.html")
 
 # rota para pagina de teste do codigo
 

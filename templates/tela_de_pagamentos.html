@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamentos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label, input {
+            margin-right: 10px;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+        .edit-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .edit-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pagamentos</h1>
+
+    <form id="filter-form" method="GET" action="/pagamentos">
+        <label for="cadastro_id">Filtrar por Cadastro ID:</label>
+        <input type="number" id="cadastro_id" name="cadastro_id" placeholder="Digite o ID do Cadastro">
+        <input type="submit" value="Filtrar">
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome Cadastro</th>
+                <th>Data Consulta</th>
+                <th>Valor Consulta</th>
+                <th>Pagamento Feito</th>
+                <th>Cadastro ID</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody id="pagamento-table-body">
+            <!-- Os dados dos pagamentos serão inseridos aqui pelo Flask -->
+            {% for pagamento in pagamentos %}
+            <tr>
+                <td>{{ pagamento.id }}</td>
+                <td>{{ pagamento.nome_cadastro }}</td>
+                <td>{{ pagamento.data_consulta }}</td>
+                <td>{{ pagamento.valor_consulta }}</td>
+                <td>{{ pagamento.pagamento_feito }}</td>
+                <td>{{ pagamento.cadastro_id }}</td>
+                <td class="action-buttons">
+                    <a href="/editar_pagamento/{{ pagamento.id }}" class="edit-button">Editar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
