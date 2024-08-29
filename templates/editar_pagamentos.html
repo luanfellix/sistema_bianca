@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-        }
+        }   
         form {
             max-width: 600px;
             margin: auto;
@@ -35,11 +35,11 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
-    </style>
+    </style>    
 </head>
 <body>
     <h1>Editar Pagamento</h1>
-    <form method="POST">
+    <form action="{{ url_for('atualizar_pagamento', cadastro_id=pagamento.cadastro_id) }}" method="POST">
         <label for="data_consulta">Data da Consulta:</label>
         <input type="date" id="data_consulta" name="data_consulta" value="{{ pagamento.data_consulta }}" required>
 

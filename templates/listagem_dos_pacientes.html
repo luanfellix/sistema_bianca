@@ -27,19 +27,19 @@
             padding: 5px 10px;
             cursor: pointer;
             border-radius: 3px;
-            margin-right: 5px; /* Espaçamento entre os botões */
+            margin-right: 5px; /* espaçamento entre os botões */
         }
         .delete-btn {
-            background-color: #f44336; /* Red */
+            background-color: #f44336; 
         }
         .view-btn {
-            background-color: #9ACD32; /* Green */
+            background-color: #9ACD32; 
         }
         .delete-btn:hover {
-            background-color: #d32f2f; /* Darker red */
+            background-color: #d32f2f; 
         }
         .view-btn:hover {
-            background-color: #6ba33f; /* Darker green */
+            background-color: #6ba33f; 
         }
     </style>
 </head>
@@ -51,7 +51,7 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Endereço</th>
-                <th>Ações</th> <!-- Coluna para ações -->
+                <th>Ações</th> 
             </tr>
         </thead>
         <tbody>
@@ -62,11 +62,11 @@
                         <td>{{ lista.nome }}</td>
                         <td>{{ lista.endereco }}</td>
                         <td>
-                            <!-- Botão de exclusão -->
+                            <!-- botao p excluir -->
                             <form action="{{ url_for('delete', id=lista.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir?');">
                                 <button type="submit" class="delete-btn">Excluir</button>
                             </form>
-                            <!-- Botão de visualização -->
+                            <!-- botao p visualizar -->
                             <form action="{{ url_for('visualizar', id=lista.id) }}" method="POST" style="display:inline;">
                                 <button type="submit" class="view-btn">Visualizar Cadastro</button>
                             </form>

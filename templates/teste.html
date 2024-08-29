@@ -22,7 +22,7 @@
             background-color: #f4f4f4;
         }
         .delete-btn {
-            background-color: #f44336; /* Red */
+            background-color: #f44336; 
             color: white;
             border: none;
             padding: 5px 10px;
@@ -30,7 +30,7 @@
             border-radius: 3px;
         }
         .delete-btn:hover {
-            background-color: #d32f2f; /* Darker red */
+            background-color: #d32f2f; 
         }
     </style>
 </head>
@@ -42,7 +42,7 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Endereço</th>
-                <th>Ações</th> <!-- Coluna para ações -->
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -53,7 +53,7 @@
                         <td>{{ lista.nome }}</td>
                         <td>{{ lista.endereco }}</td>
                         <td>
-                            <!-- Botão de exclusão -->
+                            <!-- botao p excluir -->
                             <form action="{{ url_for('delete', id=lista.id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir?');">
                                 <button type="submit" class="delete-btn">Excluir</button>
                             </form>

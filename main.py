@@ -120,18 +120,60 @@ def visualizar(id):
 
 
 # rota pra visualizar pagamentos dos dados cadastrados
-@app.route("/pagamentos")
+@app.route("/pagamentos", methods=['POST', 'GET'])
 def pagamentos():
-    query = 'SELECT '
+    cursor_dict.execute('SELECT id, nome FROM cadastro_pacientes;')
+    cadastros = cursor_dict.fetchall()
+    cursor_dict.execute("SELECT id FROM pagamento")
+    pagamentos = cursor_dict.fetchall()
 
-    return render_template("tela_de_pagamentos.html")
+    for cadastro in cadastros:
+        paciente_id = cadastro['id']
+        nome_cadastro = cadastro['nome']
 
-# rota para pagina de teste do codigo
+        cursor_dict.execute(
+            "SELECT cadastro_id FROM pagamento WHERE cadastro_id = %s", (paciente_id,))
+        pagamentos_cadastrados = cursor_dict.fetchall()
+
+        if not pagamentos_cadastrados:
+            cursor_dict.execute("""INSERT INTO pagamento (nome_cadastro, cadastro_id)
+                    VALUES(%s, %s)""", (nome_cadastro, paciente_id))
+
+    conexao_dict.commit()
+    cursor_dict.execute("SELECT * FROM pagamento")
+    pagamentos = cursor_dict.fetchall()
+
+    return render_template("tela_de_pagamentos.html", pagamentos=pagamentos)
+
+# rota  pra visualizar a edição de pagamentos
 
 
-@app.route("/teste", methods=['POST', 'GET'])
-def teste():
-    return render_template('teste.html')
+@app.route("/editar_pagamento/<int:cadastro_id>", methods=['POST', 'GET'])
+def editar_pagamento(cadastro_id):
+
+    cursor_dict.execute(
+        "SELECT * FROM pagamento WHERE cadastro_id = %s", (cadastro_id))
+    pagamento = cursor_dict.fetchone()
+    return render_template('editar_pagamentos.html', pagamento=pagamento)
+
+
+@app.route("/atualizar_pagamento/<int:cadastro_id>", methods=['POST'])
+def atualizar_pagamento(cadastro_id):
+
+    data_consulta = request.form.get('data_consulta')
+    valor_consulta = request.form.get('valor_consulta')
+    pagamento_feito = request.form.get('pagamento_feito')
+    print(valor_consulta)
+    print(data_consulta)
+    print(pagamento_feito)
+    print(cadastro_id)
+
+    cursor_dict.execute("""UPDATE pagamento SET data_consulta = %s,
+                        valor_consulta = %s,
+                        pagamento_feito = %s
+                        WHERE cadastro_id = %s""", (data_consulta, valor_consulta, pagamento_feito, cadastro_id))
+    conexao_dict.commit()
+    return redirect(url_for('pagamentos'))
 
 
 app.run(debug=True)
